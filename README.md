@@ -17,8 +17,8 @@ A simple and elegant note-taking application built with **React**. This app allo
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/note-taking-app.git
-cd note-taking-app
+git clone https://github.com/joana-mendonca/the-keeper-app.git
+cd the-keeper-app
 ```
 
 ### 2. Install Dependencies
@@ -32,9 +32,9 @@ npm run dev
 ```
 
 ## 📸 Screenshots
-[The Keeper App](./the-keeper-app.png)
+![The Keeper App](./the-keeper-app.png)
 
 ## 📚 Credit
-This project was created as part of following the "**[The Complete Full-Stack Web Development Bootcamp](https://www.udemy.com/course/the-complete-web-development-bootcamp/)**" on Udemy by Dr. Angela Yu.
+This project was created as part of following **[The Complete Full-Stack Web Development Bootcamp](https://www.udemy.com/course/the-complete-web-development-bootcamp/)** on Udemy by Dr. Angela Yu.
 
 Special thanks to Dr. Yu for her comprehensive and beginner-friendly teaching approach. This app was built based on concepts covered in the course, with additional customization and enhancements for personal learning and practice.
