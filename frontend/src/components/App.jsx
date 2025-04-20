@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
+import { useNoteStore } from "../store";
 
 function App() {
-  const [notes, setNotes] = useState([]);
+  const { fetchNotes, notes } = useNoteStore();
 
-  function addNote(newNote) {
-    setNotes(prevNotes => {
-      return [...prevNotes, newNote];
-    });
-  }
+  useEffect(() => {
+    fetchNotes();
+  }, [fetchNotes]);
+  console.log("Notes", notes);
 
   function deleteNote(id) {
     setNotes(prevNotes => {
@@ -24,18 +24,20 @@ function App() {
   return (
     <div>
       <Header />
-      <CreateArea onAdd={addNote} />
-      {notes.map((noteItem, index) => {
-        return (
-          <Note
-            key={index}
-            id={index}
-            title={noteItem.title}
-            content={noteItem.content}
-            onDelete={deleteNote}
-          />
-        );
-      })}
+      <CreateArea />
+      {notes
+        .filter((note) => note && note._id)
+        .map((note) => {
+          return (
+            <Note
+              key={note._id}
+              id={note._id}
+              title={note.title}
+              description={note.description}
+              onDelete={deleteNote}
+            />
+          );
+        })}
       <Footer />
     </div>
   );

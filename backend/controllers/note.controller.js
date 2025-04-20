@@ -42,8 +42,9 @@ export const updateNote = async (request, response) => {
     }
 
     try {
-        const updatedProduct = await Note.findByIdAndUpdate(id, note, { new: true }); //Updates note from db
-        response.status(200).json({ success: true, message: updatedProduct });
+        const updatedNote = await Note.findByIdAndUpdate(id, note, { new: true }); //Updates note from db
+        console.log(updatedNote);
+        response.status(200).json({ success: true, message: "Updated note" });
     } catch (error) {
         console.error("Error updating the note:", error.message);
         response.status(500).json({ success: false, message: "Server Error" });
