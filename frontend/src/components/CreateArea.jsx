@@ -2,34 +2,24 @@ import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { Fab } from "@mui/material";
 import { Zoom } from "@mui/material";
+import { useNoteStore } from "../store";
 
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
 
   const [note, setNote] = useState({
     title: "",
-    content: "",
+    description: "",
   });
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-
-    setNote((prevNote) => {
-      return {
-        ...prevNote,
-        [name]: value,
-      };
-    });
-  }
-
-  function submitNote(event) {
-    props.onAdd(note);
-    setNote({
-      title: "",
-      content: "",
-    });
-    event.preventDefault();
-  }
+  const { createNote } = useNoteStore();
+  
+  const handleAddNote = async () => {
+		const { success, message } = await createNote(note);
+    console.log("success=" + success);
+    console.log("message=" + message);
+    setNote({ title: "", description: ""});
+	};
 
   function expand() {
     setExpanded(true);
@@ -42,22 +32,22 @@ function CreateArea(props) {
         {isExpanded && (
           <input
             name="title"
-            onChange={handleChange}
+            onChange={(e) => setNote({ ...note, title: e.target.value })}
             value={note.title}
             placeholder="Title"
           />
         )}
 
         <textarea
-          name="content"
+          name="description"
           onClick={expand}
-          onChange={handleChange}
-          value={note.content}
+          onChange={(e) => setNote({ ...note, description: e.target.value })}
+          value={note.description}
           placeholder="Take a note..."
           rows={isExpanded ? 3 : 1}
         />
         <Zoom in={isExpanded}>
-          <Fab onClick={submitNote}>
+          <Fab onClick={handleAddNote}>
             <AddIcon />
           </Fab>
         </Zoom>
